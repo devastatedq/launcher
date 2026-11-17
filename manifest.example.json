@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "java": {
+    "name": "Java 21",
+    "version": "21.0.1",
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0/jre-21-windows-x64.zip",
+    "hash": "ЗАМЕНИ_НА_SHA256_ХЕШ_ФАЙЛА",
+    "path": "java/jre-21"
+  },
+  "client": {
+    "name": "Minecraft Client",
+    "version": "1.21.1",
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0/client-1.21.1.jar",
+    "hash": "ЗАМЕНИ_НА_SHA256_ХЕШ_ФАЙЛА",
+    "path": "client.jar"
+  },
+  "mods": [
+    {
+      "name": "trimira-combat",
+      "version": "1.0.0",
+      "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0/trimira-combat-1.0.0.jar",
+      "hash": "ЗАМЕНИ_НА_SHA256_ХЕШ_ФАЙЛА",
+      "path": "mods/trimira-combat-1.0.0.jar"
+    },
+    {
+      "name": "fabric-api",
+      "version": "0.95.0",
+      "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0/fabric-api-0.95.0.jar",
+      "hash": "ЗАМЕНИ_НА_SHA256_ХЕШ_ФАЙЛА",
+      "path": "mods/fabric-api-0.95.0.jar"
+    }
+  ],
+  "resourcepacks": [
+    {
+      "name": "Trimira Textures",
+      "version": "1.0.0",
+      "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0/trimira-textures.zip",
+      "hash": "ЗАМЕНИ_НА_SHA256_ХЕШ_ФАЙЛА",
+      "path": "resourcepacks/trimira-textures.zip"
+    }
+  ],
+  "shaderpacks": []
+}

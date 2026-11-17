@@ -1,0 +1,13 @@
+{
+  "cdn_url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases",
+  "manifest_url": "https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/releases/latest",
+  "server": {
+    "ip": "play.trimira.ru",
+    "port": 25565
+  },
+  "ram": {
+    "default": 8192,
+    "min": 2048,
+    "max": 16384
+  }
+}
