@@ -9,53 +9,62 @@ interface Slide {
 
 const SLIDES: Slide[] = [
   {
-    kicker: 'Обновление 1',
-    title: '«Мороз и Вьюга»',
+    kicker: 'Экономика',
+    title: '«Торговый контур»',
     items: [
-      'Новый регион — Северные Чертоги',
-      'Событие «Зимняя Вьюга»',
-      'Новый рейд: Ледяная Обитель',
-      'Новый босс — Снежная Княжна',
+      'Доска объявлений с фильтрами и поиском',
+      'Региональные схроны: 64–512 слотов',
+      'Посылки между регионами и игроками',
+      'Золото, сборы и комиссии',
     ],
-    tag: 'Погрузитесь в зимнюю сказку Тримиры!',
+    tag: 'Торгуй, храни и отправляй — экономика Тримиры уже работает!',
   },
   {
-    kicker: 'Событие',
-    title: '«Зимняя Вьюга»',
+    kicker: 'Хранилище',
+    title: '«Региональные схроны»',
     items: [
-      'Собирайте снежные кристаллы по всему миру',
-      'Открывайте праздничные награды',
-      'Сражайтесь за место в рейтинге события',
+      'Личный схрон в каждом торговом регионе',
+      'Расширение до 512 слотов',
+      'Покупки приходят в посылки региона',
+      'Пересылка между своими схронами',
     ],
-    tag: 'Вьюга уже накрывает Северные Чертоги.',
+    tag: 'Держи ресурсы там, где торгуешь.',
   },
   {
-    kicker: 'Рейд',
-    title: '«Ледяная Обитель»',
+    kicker: 'Доставка',
+    title: '«Посылки и золото»',
     items: [
-      'Командное подземелье на 5 игроков',
-      'Три фазы и уникальные механики',
-      'Эпическая экипировка и редкие материалы',
+      'Входящие и отправленные посылки',
+      'До 3 стаков, хранение 7 дней',
+      'Тарифы: 4 ч / 2 ч / 30 мин',
+      'Золотую посылку можно переслать в другой регион',
     ],
-    tag: 'Соберите отряд и бросьте вызов стуже.',
+    tag: 'Всё доедет — даже через всю Тримиру.',
   },
 ];
 
 interface Props {
   slide: number;
   onChange: (index: number) => void;
+  art?: (string | undefined)[];
 }
 
-export default function NewsCarousel({ slide, onChange }: Props) {
+export default function NewsCarousel({ slide, onChange, art }: Props) {
   const index = Math.max(0, Math.min(slide, SLIDES.length - 1));
   const current = SLIDES[index];
+  const artUrl = art?.[index];
 
   const prev = () => onChange((index - 1 + SLIDES.length) % SLIDES.length);
   const next = () => onChange((index + 1) % SLIDES.length);
 
   return (
     <div className="t9-news-card">
-      <div className="t9-news-art-slot">IMAGE SLOT</div>
+      <div
+        className="t9-news-art-slot"
+        style={artUrl ? { backgroundImage: `url("${artUrl}")`, color: 'transparent' } : undefined}
+      >
+        {artUrl ? '' : 'IMAGE SLOT'}
+      </div>
 
       <div className="t9-news-inner">
         <div className="t9-kicker">{current.kicker}</div>

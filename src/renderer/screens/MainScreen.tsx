@@ -6,6 +6,7 @@ import PlayButton from '../components/PlayButton';
 import ProgressBar from '../components/ProgressBar';
 import SettingsModal from '../components/SettingsModal';
 import WindowControls from '../components/WindowControls';
+import type { LauncherAssets } from '../assets/launcherAssets';
 
 const ONLINE = '12 487';
 
@@ -17,9 +18,10 @@ interface UpdateState {
 
 interface Props {
   user: User;
+  assets: LauncherAssets;
 }
 
-export default function MainScreen({ user }: Props) {
+export default function MainScreen({ user, assets }: Props) {
   const [downloading, setDownloading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState('');
@@ -126,14 +128,18 @@ export default function MainScreen({ user }: Props) {
         </div>
 
         <div className="t9-logo">
-          <span className="t9-logo-text">TRIMIRA</span>
+          {assets.logo ? (
+            <img className="t9-logo-img" src={assets.logo} alt="TRIMIRA" />
+          ) : (
+            <span className="t9-logo-text">TRIMIRA</span>
+          )}
         </div>
 
         <Sidebar active={activeTab} onChange={setActiveTab} onSettings={() => setShowSettings(true)} />
 
         <div className="t9-content">
           {activeTab === 'news' ? (
-            <NewsCarousel slide={slide} onChange={setSlide} />
+            <NewsCarousel slide={slide} onChange={setSlide} art={assets.newsArt} />
           ) : (
             <div className="t9-placeholder">
               <div className="t9-placeholder-title">{TAB_LABELS[activeTab]}</div>

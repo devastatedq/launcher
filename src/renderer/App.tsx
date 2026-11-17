@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
 import { User } from '@/shared/types';
+import { loadLauncherAssets } from './assets/launcherAssets';
+import type { LauncherAssets } from './assets/launcherAssets';
 import bg from '../../resources/backgrounds/bg.png';
 
 const BASE_W = 1600;
@@ -10,6 +12,7 @@ const BASE_H = 900;
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [scale, setScale] = useState(1);
+  const [assets, setAssets] = useState<LauncherAssets>({ newsArt: [] });
 
   useEffect(() => {
     const resize = () => {
@@ -18,6 +21,16 @@ function App() {
     resize();
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
+  }, []);
+
+  useEffect(() => {
+    let alive = true;
+    loadLauncherAssets().then((loaded) => {
+      if (alive) setAssets(loaded);
+    });
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (
@@ -33,9 +46,9 @@ function App() {
         style={{ transform: `translate(-50%, -50%) scale(${scale})` }}
       >
         {!currentUser ? (
-          <LoginScreen onLogin={setCurrentUser} />
+          <LoginScreen onLogin={setCurrentUser} assets={assets} />
         ) : (
-          <MainScreen user={currentUser} />
+          <MainScreen user={currentUser} assets={assets} />
         )}
       </div>
     </div>

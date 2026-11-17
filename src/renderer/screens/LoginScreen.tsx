@@ -2,14 +2,16 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { User } from '@/shared/types';
 import Icon from '../components/Icon';
 import WindowControls from '../components/WindowControls';
+import type { LauncherAssets } from '../assets/launcherAssets';
 
 const REMEMBER_KEY = 'trimira.rememberedUser';
 
 interface Props {
   onLogin: (user: User) => void;
+  assets: LauncherAssets;
 }
 
-export default function LoginScreen({ onLogin }: Props) {
+export default function LoginScreen({ onLogin, assets }: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -69,7 +71,11 @@ export default function LoginScreen({ onLogin }: Props) {
 
       <div className="t9-auth-panel t9-ornate">
         <div className="t9-auth-logo">
-          <span className="t9-logo-text">TRIMIRA</span>
+          {assets.logo ? (
+            <img className="t9-logo-img" src={assets.logo} alt="TRIMIRA" />
+          ) : (
+            <span className="t9-logo-text">TRIMIRA</span>
+          )}
           <div className="t9-auth-logo-sub">Мир приключений</div>
         </div>
 

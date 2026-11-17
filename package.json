@@ -1,6 +1,6 @@
 {
   "name": "trimira-launcher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Trimira Game Launcher",
   "main": "dist-electron/main.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "dev:vite": "vite",
     "dev:electron": "wait-on http://localhost:5173 && electron .",
     "build": "vite build && node build-electron.js && electron-builder",
+    "build:publish": "vite build && node build-electron.js && electron-builder --win nsis --publish always",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -61,12 +62,14 @@
       {
         "provider": "github",
         "owner": "devastatedq",
-        "repo": "launcher"
+        "repo": "launcher",
+        "releaseType": "release"
       }
     ],
     "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
+      "oneClick": true,
+      "perMachine": false,
+      "allowElevation": false,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Trimira",

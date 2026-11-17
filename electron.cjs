@@ -261,6 +261,28 @@ ipcMain.handle('window:toggle-maximize', () => {
 
 ipcMain.handle('app:version', () => app.getVersion());
 
+const ASSET_RE = /^(frames|logos|icons|ui|news)\/[A-Za-z0-9._-]+\.(png|jpg|jpeg|webp)$/;
+
+ipcMain.handle('assets:load', async (_event, rel) => {
+  try {
+    if (typeof rel !== 'string' || !ASSET_RE.test(rel)) return null;
+    const root = app.isPackaged
+      ? path.join(process.resourcesPath, 'resources')
+      : path.join(__dirname, '..', 'resources');
+    const full = path.join(root, rel);
+    const data = await fs.promises.readFile(full);
+    const ext = path.extname(full).toLowerCase();
+    const mime = ext === '.jpg' || ext === '.jpeg'
+      ? 'image/jpeg'
+      : ext === '.webp'
+        ? 'image/webp'
+        : 'image/png';
+    return `data:${mime};base64,${data.toString('base64')}`;
+  } catch {
+    return null;
+  }
+});
+
 ipcMain.handle('launcher:update-state', () => lastUpdateState);
 
 ipcMain.handle('launcher:update-check', () => {
